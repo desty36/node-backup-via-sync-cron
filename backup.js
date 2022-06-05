@@ -1,9 +1,11 @@
+// npm install dependencies
 //cron-timer, Destination and Source File can by changed and found in .env
 require("dotenv").config();
 const CronJob = require("cron").CronJob;
 const Rsync = require("rsync");
 // .flags "a" -> archived whole dir 
 rsync = new Rsync()
+    // for windows insert .executable("robocopy");
     .flags("a") 
     .source(process.env.SOURCE_DIR)
     .destination(process.env.DESTINATION_DIR);
