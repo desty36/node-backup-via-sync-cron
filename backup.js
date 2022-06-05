@@ -4,12 +4,15 @@ require("dotenv").config();
 const CronJob = require("cron").CronJob;
 const Rsync = require("rsync");
 
-const copyProgramm = process.platform === "win32" ? "robocopy" : "rsync";
- 
-// .flags "a" -> archived whole dir 
+// plattformunabänigkeit
+const copyProgram = process.platform === 'win32' ? 'robocopy' : 'rsync';
+
+
 rsync = new Rsync()
-    executable("copyProgramm");
+    .executable(copyProgram)
+    // .flags "a" -> copying whole dir
     .flags("a") 
+    // reads from the .env file in project dir
     .source(process.env.SOURCE_DIR)
     .destination(process.env.DESTINATION_DIR);
 
