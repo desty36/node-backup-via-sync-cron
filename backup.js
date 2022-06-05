@@ -3,9 +3,12 @@
 require("dotenv").config();
 const CronJob = require("cron").CronJob;
 const Rsync = require("rsync");
+
+const copyProgramm = process.platform === "win32" ? "robocopy" : "rsync";
+ 
 // .flags "a" -> archived whole dir 
 rsync = new Rsync()
-    // for windows insert .executable("robocopy");
+    executable("copyProgramm");
     .flags("a") 
     .source(process.env.SOURCE_DIR)
     .destination(process.env.DESTINATION_DIR);
